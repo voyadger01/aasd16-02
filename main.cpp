@@ -23,7 +23,7 @@ BiList< T >* create_list()
 }
 
 template < class T, class D >
-BiList<T>* insert(BiList<T>* head, const T& val)
+BiList<T>* insert(BiList<T>* head, T&& val)
 {
   if (!head) {
     return nullptr;
@@ -35,7 +35,7 @@ BiList<T>* insert(BiList<T>* head, const T& val)
 }
 
 template < class T, class D >
-BiList< T >* add(BiList< T >* head, const T& val)
+BiList< T >* add(BiList< T >* head, T&& val)
 {
   if (!head) {
     return nullptr;
