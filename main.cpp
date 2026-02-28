@@ -1,3 +1,4 @@
+#include <atomic>
 #include <iostream>
 
 // Fake + Loop, Bidir
@@ -53,4 +54,23 @@ void pop_front(BiList< T >* head)
   head->next = temp->next;
   temp->next->prev = head;
   delete temp;
+}
+
+template< class T >
+void clear(BiList< T >* head)
+{
+  while (head->next != head) {
+    pop_front(head);
+  }
+  delete head;
+}
+
+template< class T, class F >
+void traverse(BiList< T >* head, F f)
+{
+  BiList< T >* cur = head;
+  while (cur != head) {
+    f(cur->val);
+    cur = cur->next;
+  }
 }
