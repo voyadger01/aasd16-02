@@ -19,7 +19,7 @@ BiList< T >* create_list()
   return head;
 }
 
-template <class T>
+template < class T >
 BiList<T>* push_front(BiList<T>* head, const T& val)
 {
   if (!head) {
@@ -28,5 +28,30 @@ BiList<T>* push_front(BiList<T>* head, const T& val)
   BiList<T>* node = new BiList<T>{val, head->next, head};
   head->next->prev = node;
   head->next = node;
+  return head;
+}
+
+template < class T >
+BiList< T >* push_back(BiList< T >* head, const T& val)
+{
+  if (!head) {
+      return nullptr;
+  }
+  BiList< T >* node = new BiList< T >{val, head, head->prev};
+  head->prev->next = node;
+  head->prev = node;
+  return head;
+}
+
+template < class T >
+BiList< T >* pop_front(BiList< T >* head)
+{
+  if (!head || head->next == head) {
+    return head;
+  }
+  BiList< T >* temp = head->next;
+  head->next = temp->next;
+  temp->next->prev = head;
+  delete temp;
   return head;
 }
