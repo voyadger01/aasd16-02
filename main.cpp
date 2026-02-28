@@ -18,3 +18,15 @@ BiList< T >* create_list()
   head->prev = head;
   return head;
 }
+
+template <class T>
+BiList<T>* push_front(BiList<T>* head, const T& val)
+{
+  if (!head) {
+      return nullptr;
+  }
+  BiList<T>* node = new BiList<T>{val, head->next, head};
+  head->next->prev = node;
+  head->next = node;
+  return head;
+}
