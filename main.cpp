@@ -1,6 +1,8 @@
 #include <cstddef>
 
 // Fake + Loop, Bidir
+// Неявный интерфейс для Т: T(), T(const T&), T(T&&)
+// Неявный интерфейс для F: operator(), F(const F&)
 
 template < class T >
 struct BiList
@@ -20,7 +22,7 @@ BiList< T >* create_list()
 }
 
 template < class T >
-BiList<T>* push_front(BiList<T>* head, const T& val)
+BiList<T>* add(BiList<T>* head, const T& val)
 {
   if (!head) {
       return nullptr;
@@ -32,7 +34,7 @@ BiList<T>* push_front(BiList<T>* head, const T& val)
 }
 
 template < class T >
-BiList< T >* push_back(BiList< T >* head, const T& val)
+BiList< T >* insert(BiList< T >* head, const T& val)
 {
   if (!head) {
       return nullptr;
@@ -65,13 +67,14 @@ void clear(BiList< T >* head)
 }
 
 template< class T, class F >
-void traverse(BiList< T >* head, F f)
+F traverse(BiList< T >* head, F f)
 {
   BiList< T >* cur = head;
   while (cur != head) {
     f(cur->val);
     cur = cur->next;
   }
+  return f;
 }
 
 template< class T >
