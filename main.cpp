@@ -22,10 +22,10 @@ BiList< T >* create_list()
 }
 
 template < class T >
-BiList<T>* add(BiList<T>* head, const T& val)
+BiList<T>* insert(BiList<T>* head, const T& val)
 {
   if (!head) {
-      return nullptr;
+    return nullptr;
   }
   BiList<T>* node = new BiList<T>{val, head->next, head}; // T::T(const T&), T::T(T&&)
   head->next->prev = node;
@@ -34,10 +34,10 @@ BiList<T>* add(BiList<T>* head, const T& val)
 }
 
 template < class T >
-BiList< T >* insert(BiList< T >* head, const T& val)
+BiList< T >* add(BiList< T >* head, const T& val)
 {
   if (!head) {
-      return nullptr;
+    return nullptr;
   }
   BiList< T >* node = new BiList< T >{val, head, head->prev}; // T::T(const T&), T::T(T&&)
   head->prev->next = node;
@@ -60,6 +60,9 @@ void pop_front(BiList< T >* head) noexcept
 template< class T >
 void clear(BiList< T >* head) noexcept
 {
+  if (!head) {
+    return;
+  }
   while (head->next != head) {
     pop_front(head);
   }
@@ -69,6 +72,9 @@ void clear(BiList< T >* head) noexcept
 template< class T, class F >
 F traverse(BiList< T >* head, F f)
 {
+  if (!head) {
+    return nullptr;
+  }
   BiList< T >* cur = head->next;
   while (cur != head) {
     f(cur->val); // F::operator()
@@ -80,6 +86,9 @@ F traverse(BiList< T >* head, F f)
 template< class T >
 BiList< T >* convert(T* arr, size_t s)
 {
+  if (!arr) {
+    return nullptr;
+  }
   BiList< T >* head = create_list< T >();
   for (size_t i = 0; i < s; i++) {
     try {
