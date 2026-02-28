@@ -1,5 +1,7 @@
 #include <iostream>
 
+// Fake + Loop, Bidir
+
 template < class T >
 struct BiList
 {
@@ -7,3 +9,12 @@ struct BiList
   BiList< T >* next;
   BiList< T >* prev;
 };
+
+template < class T >
+BiList< T >* create_list()
+{
+  BiList< T >* head = new BiList< T >();
+  head->next = head;
+  head->prev = head;
+  return head;
+}
