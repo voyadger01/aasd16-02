@@ -1,4 +1,5 @@
 #include <cstddef>
+#include <utility>
 
 // Fake + Loop, Bidir
 // Неявный интерфейс для Т: T(), T(const T&), T(T&&)
@@ -21,25 +22,25 @@ BiList< T >* create_list()
   return head;
 }
 
-template < class T >
+template < class T, class D >
 BiList<T>* insert(BiList<T>* head, const T& val)
 {
   if (!head) {
     return nullptr;
   }
-  BiList<T>* node = new BiList<T>{val, head->next, head}; // T::T(const T&), T::T(T&&)
+  BiList<T>* node = new BiList<T>{std::forward< D >(val), head->next, head}; // T::T(const T&), T::T(T&&)
   head->next->prev = node;
   head->next = node;
   return head;
 }
 
-template < class T >
+template < class T, class D >
 BiList< T >* add(BiList< T >* head, const T& val)
 {
   if (!head) {
     return nullptr;
   }
-  BiList< T >* node = new BiList< T >{val, head, head->prev}; // T::T(const T&), T::T(T&&)
+  BiList< T >* node = new BiList< T >{std::forward< D >(val), head, head->prev}; // T::T(const T&), T::T(T&&)
   head->prev->next = node;
   head->prev = node;
   return head;
@@ -73,7 +74,7 @@ template< class T, class F >
 F traverse(BiList< T >* head, F f)
 {
   if (!head) {
-    return nullptr;
+    return f;
   }
   BiList< T >* cur = head->next;
   while (cur != head) {
