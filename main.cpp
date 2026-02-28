@@ -44,14 +44,13 @@ BiList< T >* push_back(BiList< T >* head, const T& val)
 }
 
 template < class T >
-BiList< T >* pop_front(BiList< T >* head)
+void pop_front(BiList< T >* head)
 {
   if (!head || head->next == head) {
-    return head;
+    return;
   }
   BiList< T >* temp = head->next;
   head->next = temp->next;
   temp->next->prev = head;
   delete temp;
-  return head;
 }
