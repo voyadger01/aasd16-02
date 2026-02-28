@@ -1,5 +1,4 @@
-#include <atomic>
-#include <iostream>
+#include <cstddef>
 
 // Fake + Loop, Bidir
 
@@ -72,5 +71,14 @@ void traverse(BiList< T >* head, F f)
   while (cur != head) {
     f(cur->val);
     cur = cur->next;
+  }
+}
+
+template< class T >
+void array_to_list(T* arr, size_t s)
+{
+  BiList< T >* head = create_list< T >();
+  for (size_t i = 0; i < s; i++) {
+    push_back(head, arr[i]);
   }
 }
