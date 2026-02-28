@@ -75,10 +75,12 @@ void traverse(BiList< T >* head, F f)
 }
 
 template< class T >
-void array_to_list(T* arr, size_t s)
+BiList< T >* convert(T* arr, size_t s)
 {
   BiList< T >* head = create_list< T >();
   for (size_t i = 0; i < s; i++) {
     push_back(head, arr[i]);
   }
+  delete[] arr; 
+  return head;
 }
