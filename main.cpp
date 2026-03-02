@@ -1,7 +1,7 @@
 #include <cstddef>
 #include <utility>
 
-// Fake + Loop, Bidir
+// Fake + Loop
 // Неявный интерфейс для Т: T(), T(const T&), T(T&&)
 // Неявный интерфейс для F: operator(), F(const F&)
 
