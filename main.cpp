@@ -73,6 +73,5 @@ template < class T > BiList< T > *convert(T *arr, size_t s)
       throw;
     }
   }
-  delete[] arr;
   return head;
 }
